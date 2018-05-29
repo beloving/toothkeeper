@@ -7,6 +7,22 @@ import (
 
 func init() {
 
+	beego.GlobalControllerRouter["toothkeeper/controllers:ToothController"] = append(beego.GlobalControllerRouter["toothkeeper/controllers:ToothController"],
+		beego.ControllerComments{
+			Method: "Post",
+			Router: `/`,
+			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["toothkeeper/controllers:ToothController"] = append(beego.GlobalControllerRouter["toothkeeper/controllers:ToothController"],
+		beego.ControllerComments{
+			Method: "Get",
+			Router: `/:id`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 	beego.GlobalControllerRouter["toothkeeper/controllers:UserController"] = append(beego.GlobalControllerRouter["toothkeeper/controllers:UserController"],
 		beego.ControllerComments{
 			Method: "Post",

@@ -2,17 +2,41 @@ swagger: "2.0"
 info: {}
 basePath: /v1
 paths:
-  /user/:
-    get:
+  /tooth/:
+    post:
       tags:
-      - user
-      description: get all Users
-      operationId: UserController.GetAll
+      - tooth
+      description: create tooths
+      operationId: ToothController.CreateTooth
+      parameters:
+      - in: body
+        name: body
+        description: 添加一个牙齿模型数据
+        schema:
+          $ref: '#/definitions/models.Tooth'
       responses:
         "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.User'
+          description: succ
+        "403":
+          description: fail
+  /tooth/{id}:
+    get:
+      tags:
+      - tooth
+      description: create tooths
+      operationId: ToothController.CreateTooth
+      parameters:
+      - in: path
+        name: id
+        description: 牙齿id
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: succ
+        "403":
+          description: fail
+  /user/:
     post:
       tags:
       - user
@@ -21,7 +45,7 @@ paths:
       parameters:
       - in: body
         name: body
-        description: The body
+        description: 注册手机号和密码
         schema:
           $ref: '#/definitions/models.User'
       responses:
@@ -29,49 +53,6 @@ paths:
           description: succ
         "403":
           description: fail
-  /user/{uid}:
-    get:
-      tags:
-      - user
-      description: get user by uid
-      operationId: UserController.Get
-      parameters:
-      - in: path
-        name: uid
-        description: The key for staticblock
-        required: true
-        type: string
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.User'
-        "403":
-          description: :uid is empty
-    put:
-      tags:
-      - user
-      description: update the user
-      operationId: UserController.Update
-      parameters:
-      - in: path
-        name: uid
-        description: The uid you want to update
-        required: true
-        type: string
-      - in: body
-        name: body
-        description: body for user content
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.User'
-        "403":
-          description: :uid is not int
   /user/login:
     post:
       tags:
@@ -81,7 +62,7 @@ paths:
       parameters:
       - in: body
         name: namewithpwd
-        description: The body
+        description: 手机号和密码登录
         schema:
           $ref: '#/definitions/models.User'
       responses:
@@ -89,15 +70,6 @@ paths:
           description: '{string} login success'
         "403":
           description: user not exist
-  /user/logout:
-    get:
-      tags:
-      - user
-      description: Logs out current logged in user session
-      operationId: UserController.logout
-      responses:
-        "200":
-          description: '{string} logout success'
 definitions:
   models.Profile:
     title: Profile
@@ -108,7 +80,7 @@ definitions:
       Age:
         type: integer
         format: int64
-      Create:
+      Created:
         type: string
         format: string
       Email:
@@ -117,16 +89,53 @@ definitions:
         type: string
       Head:
         type: string
-      Update:
+      Updated:
         type: string
         format: string
       Username:
         type: string
+  models.Tooth:
+    title: Tooth
+    type: object
+    properties:
+      Created:
+        type: string
+        format: string
+      Delete:
+        type: boolean
+      Id:
+        type: integer
+        format: int64
+      Paramter1:
+        type: number
+        format: float
+      Paramter2:
+        type: integer
+        format: int64
+      Paramter3:
+        type: string
+      Paramter4:
+        type: string
+      Paramter5:
+        type: string
+      Paramter6:
+        type: string
+      Paramter7:
+        type: string
+      Paramter8:
+        type: string
+      Paramter9:
+        type: string
+      Paramter10:
+        type: string
+      Updated:
+        type: string
+        format: string
   models.User:
     title: User
     type: object
     properties:
-      Create:
+      Created:
         type: string
         format: string
       Id:
@@ -138,10 +147,6 @@ definitions:
         type: string
       Profile:
         $ref: '#/definitions/models.Profile'
-      Update:
+      Updated:
         type: string
         format: string
-tags:
-- name: user
-  description: |
-    Operations about Users

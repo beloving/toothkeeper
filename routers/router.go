@@ -13,6 +13,10 @@ func init() {
 				&controllers.UserController{},
 			),
 		),
+		beego.NSNamespace("/tooth",
+				beego.NSInclude(&controllers.ToothController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

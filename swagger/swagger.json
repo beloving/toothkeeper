@@ -5,22 +5,60 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/user/": {
-            "get": {
+        "/tooth/": {
+            "post": {
                 "tags": [
-                    "user"
+                    "tooth"
                 ],
-                "description": "get all Users",
-                "operationId": "UserController.GetAll",
-                "responses": {
-                    "200": {
-                        "description": "",
+                "description": "create tooths",
+                "operationId": "ToothController.CreateTooth",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "添加一个牙齿模型数据",
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/models.Tooth"
                         }
                     }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succ"
+                    },
+                    "403": {
+                        "description": "fail"
+                    }
                 }
-            },
+            }
+        },
+        "/tooth/{id}": {
+            "get": {
+                "tags": [
+                    "tooth"
+                ],
+                "description": "create tooths",
+                "operationId": "ToothController.CreateTooth",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "牙齿id",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succ"
+                    },
+                    "403": {
+                        "description": "fail"
+                    }
+                }
+            }
+        },
+        "/user/": {
             "post": {
                 "tags": [
                     "user"
@@ -31,7 +69,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The body",
+                        "description": "注册手机号和密码",
                         "schema": {
                             "$ref": "#/definitions/models.User"
                         }
@@ -58,7 +96,7 @@
                     {
                         "in": "body",
                         "name": "namewithpwd",
-                        "description": "The body",
+                        "description": "手机号和密码登录",
                         "schema": {
                             "$ref": "#/definitions/models.User"
                         }
@@ -70,85 +108,6 @@
                     },
                     "403": {
                         "description": "user not exist"
-                    }
-                }
-            }
-        },
-        "/user/logout": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "Logs out current logged in user session",
-                "operationId": "UserController.logout",
-                "responses": {
-                    "200": {
-                        "description": "{string} logout success"
-                    }
-                }
-            }
-        },
-        "/user/{uid}": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "get user by uid",
-                "operationId": "UserController.Get",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uid",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    },
-                    "403": {
-                        "description": ":uid is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "user"
-                ],
-                "description": "update the user",
-                "operationId": "UserController.Update",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uid",
-                        "description": "The uid you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for user content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    },
-                    "403": {
-                        "description": ":uid is not int"
                     }
                 }
             }
@@ -166,7 +125,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "Create": {
+                "Created": {
                     "type": "string",
                     "format": "string"
                 },
@@ -179,7 +138,7 @@
                 "Head": {
                     "type": "string"
                 },
-                "Update": {
+                "Updated": {
                     "type": "string",
                     "format": "string"
                 },
@@ -188,11 +147,64 @@
                 }
             }
         },
+        "models.Tooth": {
+            "title": "Tooth",
+            "type": "object",
+            "properties": {
+                "Created": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "Delete": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Paramter1": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "Paramter10": {
+                    "type": "string"
+                },
+                "Paramter2": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Paramter3": {
+                    "type": "string"
+                },
+                "Paramter4": {
+                    "type": "string"
+                },
+                "Paramter5": {
+                    "type": "string"
+                },
+                "Paramter6": {
+                    "type": "string"
+                },
+                "Paramter7": {
+                    "type": "string"
+                },
+                "Paramter8": {
+                    "type": "string"
+                },
+                "Paramter9": {
+                    "type": "string"
+                },
+                "Updated": {
+                    "type": "string",
+                    "format": "string"
+                }
+            }
+        },
         "models.User": {
             "title": "User",
             "type": "object",
             "properties": {
-                "Create": {
+                "Created": {
                     "type": "string",
                     "format": "string"
                 },
@@ -209,17 +221,11 @@
                 "Profile": {
                     "$ref": "#/definitions/models.Profile"
                 },
-                "Update": {
+                "Updated": {
                     "type": "string",
                     "format": "string"
                 }
             }
         }
-    },
-    "tags": [
-        {
-            "name": "user",
-            "description": "Operations about Users\n"
-        }
-    ]
+    }
 }

@@ -28,9 +28,10 @@ func main() {
 	bf.WriteString(dbname)
 	bf.WriteString(" host=127.0.0.1 port=5432 sslmode=disable")
 	orm.RegisterDataBase("default", dbtype,bf.String(), 30)
+
 	// register model
 	orm.RegisterModel(new(models.User))
-
+	orm.RegisterModel(new(models.Tooth))
 
 	orm.RunSyncdb("default", false, true)
 	beego.Run()

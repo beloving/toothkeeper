@@ -14,8 +14,8 @@ type User struct {
 	Phone    string
 	Password string
 	Profile  Profile  `orm:"-"`
-	Create   time.Time
-	Update   time.Time
+	Created time.Time `orm:"auto_now_add;type(datetime)"`
+	Updated time.Time `orm:"auto_now;type(datetime)"`
 }
 
 type Profile struct {
@@ -25,8 +25,8 @@ type Profile struct {
 	Email   string
 	Head    string
 	Username string
-	Create   time.Time
-	Update   time.Time
+	Created time.Time `orm:"auto_now_add;type(datetime)"`
+	Updated time.Time `orm:"auto_now;type(datetime)"`
 }
 
 func AddUser(u User)(va int64,err error){
