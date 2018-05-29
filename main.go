@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "toothapi/routers"
+	_ "toothkeeper/routers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"bytes"
-	"toothapi/models"
+	"toothkeeper/models"
 	_"github.com/lib/pq"
 )
 

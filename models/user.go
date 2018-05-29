@@ -30,7 +30,7 @@ type Profile struct {
 }
 
 func AddUser(u User)(va int64,err error){
-	_,error :=GetUser(&User{Username: u.Username})
+	_,error :=GetUser(&User{Phone: u.Phone})
 	if error == NotExit{
 		o:=orm.NewOrm()
 		index,err:=o.Insert(&u)
@@ -48,7 +48,7 @@ func AddUser(u User)(va int64,err error){
 
 func GetUser(uu *User) (u *User, err error) {
 	var user User
-	err = orm.NewOrm().QueryTable("user").Filter("username",uu.Username).One(&user)
+	err = orm.NewOrm().QueryTable("user").Filter("username",uu.Phone).One(&user)
 	beego.Warn(err)
 	if err ==nil {
 		return uu, nil
@@ -62,25 +62,25 @@ func GetAllUsers() *User {
 	return users
 }
 
-func UpdateUser(username string, uu *User) (a *User, err error) {
+func UpdateUser(phone string, uu *User) (a *User, err error) {
 	user:=new(User)
-	user.Username = username
+	user.Phone = phone
 	user,error :=GetUser(user)
 	if error == nil{
 		if len(uu.Password) != 0 && (strings.Compare(uu.Password,user.Password) !=0){
 			user.Password = uu.Password
 		}
-		if len(uu.Address) != 0 && (strings.Compare(uu.Address,user.Address) !=0){
-			user.Address = uu.Address
+		if len(uu.Profile.Address) != 0 && (strings.Compare(uu.Profile.Address,user.Profile.Address) !=0){
+			user.Profile.Address = uu.Profile.Address
 		}
-		if uu.Age != 0 && uu.Age != user.Age{
-			user.Age = uu.Age
+		if uu.Profile.Age != 0 && uu.Profile.Age != user.Profile.Age{
+			user.Profile.Age = uu.Profile.Age
 		}
-		if len(uu.Email) != 0 && (strings.Compare(uu.Email,user.Email) !=0){
-			user.Email = uu.Email
+		if len(uu.Profile.Email) != 0 && (strings.Compare(uu.Profile.Email,user.Profile.Email) !=0){
+			user.Profile.Email = uu.Profile.Email
 		}
-		if len(uu.Gender) != 0 && (strings.Compare(uu.Gender,user.Gender) !=0){
-			user.Gender = uu.Gender
+		if len(uu.Profile.Gender) != 0 && (strings.Compare(uu.Profile.Gender,user.Profile.Gender) !=0){
+			user.Profile.Gender = uu.Profile.Gender
 		}
 		_,err :=orm.NewOrm().Update(user)
 		if err == nil {

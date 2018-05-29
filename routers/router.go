@@ -2,9 +2,8 @@
 package routers
 
 import (
-	"toothapi/controllers"
-
 	"github.com/astaxie/beego"
+	"toothkeeper/controllers"
 )
 
 func init() {
